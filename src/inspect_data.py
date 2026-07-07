@@ -10,3 +10,6 @@ print("Nulls per column: ",df.isnull().sum())
 print("Duplicate Rows: ",df.duplicated().sum())
 print("The First 5 Rows:")
 print(df.head())
+
+print(df["Order Date"].head())
+print(df["Ship Date"].head())
