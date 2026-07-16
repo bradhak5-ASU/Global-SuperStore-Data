@@ -12,7 +12,7 @@ The copy in circulation is damaged. Both date columns contain the same corrupted
 
 ## The pipeline
 
-![Pipeline flow]![alt text](architecture.png)
+[Pipeline flow]![alt text](architecture.png)
 
 Everything lives in two folders. `src/` builds the data, `app/` consumes it.
 
@@ -43,7 +43,7 @@ Run `psql -d <yourdb> -f src/dqa.sql` to see each of these prove itself.
 
 Built in Tableau from the exported views: profit by sub category (Tables loses about 64K while everything else is profitable), monthly sales trend on the recovered dates, sales by market, and a segment breakdown, with a market filter wired across panels.
 
-![Dashboard]![alt text](<Global Superstore — Sales & Profitability.png>)
+[Dashboard]![alt text](<Global Superstore — Sales & Profitability.png>)
 
 View it live: [Tableau Public dashboard]
 https://public.tableau.com/app/profile/balaji.radhakrishnan.padmanabhan/viz/GlobalSuperstore_17842403008840/GlobalSuperstoreSalesProfitability?publish=yes
