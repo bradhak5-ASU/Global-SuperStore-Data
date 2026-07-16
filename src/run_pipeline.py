@@ -4,6 +4,7 @@ import sys
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
+import pandas as pd
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))   
@@ -64,5 +65,23 @@ print("          v_product_performance, v_segment_summary")
 
 banner("STEP 4/4: Data-quality evidence (from dqa.sql)")
 run_sql_file("dqa.sql", show_results=True)
+
+banner("STEP 5/5: Export views for BI tools")
+export_dir = os.path.join(ROOT, "data", "exports")
+os.makedirs(export_dir, exist_ok=True)
+view_names = [
+    "v_sales_by_region",
+    "v_monthly_trend",
+    "v_product_performance",
+    "v_segment_summary",
+]
+xlsx_path = os.path.join(export_dir, "superstore_views.xlsx")
+with pd.ExcelWriter(xlsx_path) as writer:
+    for v in view_names:
+        df = pd.read_sql(f"SELECT * FROM {v}", engine)
+        df.to_csv(os.path.join(export_dir, f"{v}.csv"), index=False)
+        df.to_excel(writer, sheet_name=v, index=False)
+        print(f"  {v}: {len(df)} rows")
+print(f"  workbook: {xlsx_path}")
 
 banner("PIPELINE COMPLETE")
